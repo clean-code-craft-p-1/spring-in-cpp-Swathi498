@@ -4,22 +4,20 @@
 Statistics::Stats Statistics::ComputeStatistics(const std::vector<double>& vec) 
 {
     //Implement statistics here
-    Stats value;
+    Stats stat;
     
     if(vec.empty())
     {
-        value.average = NAN;
-        value.max 	  = NAN;
-        value.min 	  = NAN;
+        stat.average = NAN;
+        stat.max 	  = NAN;
+        stat.min 	  = NAN;
+        return stat;
     }
-    else
-    {
-        value.average = FindAverage(vec);
-        value.max 	  = FindMax(vec);
-        value.min 	  = FindMin(vec);	
-    }
-
-    return value;
+    
+    stat.average = accumulate(vec.begin(), vec.end(), 0.0) / vec.size();
+    stat.max 	  = *max_element(vec.begin(), vec.end());
+    stat.min 	  = *min_element(vec.begin(), vec.end());
+    return stat;
 }
 
 
